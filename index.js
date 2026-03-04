@@ -116,7 +116,7 @@ const container = document.querySelector("#card")
 const newBookBtn = document.createElement("button");
 newBookBtn.textContent = "Create new Book";
 newBookBtn.style.cssText = `
- background-color: #4CAF50; /* green */
+ background-color: #4CAF50; 
   color: white;
   padding: 10px 20px;
   border: none;
@@ -128,7 +128,9 @@ newBookBtn.style.cssText = `
 container.appendChild(newBookBtn);
 
 const form = document.getElementById("book-form");
-form.style.cssText = `      
+form.style.display = 'none';
+
+form.style.cssText += `      
   width: 450px;          
   max-width: 90%;         
   margin: 30px auto;      
@@ -160,7 +162,7 @@ inputs.forEach(input => {
 
 const addBookBtn = document.querySelector(".add-book");
 addBookBtn.style.cssText = `
-background-color: #4CAF50; /* green */
+background-color: #4CAF50; 
   color: white;
   padding: 10px 20px;
   border: none;
