@@ -44,3 +44,40 @@ function displayBooks(arr){
 }
 
 displayBooks(myLibrary);
+
+const container = document.querySelector("#card")
+const newBookBtn = document.createElement("button");
+newBookBtn.textContent = "Create new Book";
+newBookBtn.style.cssText = `
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+`;
+
+container.appendChild(newBookBtn);
+
+const form = document.getElementById("book-form");
+
+newBookBtn.addEventListener("click" ,() =>{
+    form.style.display = 'block';
+} );
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const haveRead = document.getElementById('haveRead').checked ? "Have read" : "Haven't read";
+
+    addBookToLibrary(title, author, pages, haveRead);
+
+    displayBooks(myLibrary);
+    form.reset();
+    form.style.display = 'none';
+})
