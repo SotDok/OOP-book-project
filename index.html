@@ -1,30 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book oop</title>
-    <script src="index.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library</title>
+
+<script src="index.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
-<body>
-    <div id="container">
-    <h1>Library</h1>
-    <div id="card">
-        <ul class="book-list">
-            
-        </ul>
+
+<body class="min-h-screen flex items-center justify-center bg-linear-to-r from-purple-400 via-pink-500 to-red-500 p-10">
+
+<div id="container" class="w-full max-w-4xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-[13px] flex flex-col gap-8">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-800 tracking-wide">
+            📚 My Library
+        </h1>
+
+        <button id="new-book-btn"
+        class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-lg shadow-md ">
+        + New Book
+        </button>
     </div>
-    <form id="book-form" style="display: none;">
-        <input type="text" id="title" placeholder="Title" required>
-        <input type="text" id="author" placeholder="Author" required>
-        <input type="number" id="pages" placeholder="Pages" min="0" max="1500" required>
-        <label>
-            <input type="checkbox" id="haveRead">
-            Have Read
+
+    <!-- Books container -->
+    <div id="card" class="flex flex-col gap-4">
+
+        <ul class="book-list flex flex-col gap-3">
+
+            <!-- Example book card -->
+            <!-- JS will generate these -->
+            <li class="flex justify-between items-center bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition">
+
+                <div class="flex flex-col">
+                    <span class="font-semibold text-gray-800">Book Title</span>
+                    <span class="text-sm text-gray-500">Author • 350 pages</span>
+                </div>
+
+                <div class="flex gap-2">
+
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm">
+                        Toggle
+                    </button>
+
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm">
+                        Delete
+                    </button>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Form -->
+    <form id="book-form" class="flex flex-col gap-4 bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner" style="display: none;">
+
+        <h2 class="text-lg font-semibold text-gray-700">Add New Book</h2>
+
+        <input
+        type="text"
+        id="title"
+        placeholder="Title"
+        required
+        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+        >
+
+        <input
+        type="text"
+        id="author"
+        placeholder="Author"
+        required
+        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+        >
+
+        <input
+        type="number"
+        id="pages"
+        placeholder="Pages"
+        min="0"
+        max="1500"
+        required
+        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+        >
+
+        <label class="flex items-center gap-2 text-gray-700">
+            <input type="checkbox" id="haveRead" class="w-4 h-4">
+            Have read
         </label>
-        <button class="add-book" type="submit">Add book</button>
+
+        <button
+        id="add-book"
+        type="submit"
+        class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-lg transition">
+        Add Book
+        </button>
+
     </form>
-    </div>  
+
+</div>
+
 </body>
 </html>
