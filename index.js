@@ -1,36 +1,46 @@
 const myLibrary = [];
 
-function Book(id, title, author, pages, haveRead) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.haveRead = haveRead;
-
+class Book {
+    constructor(id, title, author, pages, haveRead) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.haveRead = haveRead;
+    }
 }
 
-const firstBook = new Book(
-    1,
-    'O trofimos',
-    'Emilios Gkletsos',
-    420,
-    "haven't read"
-);
 
+// function addBookToLibrary(title, author, pages, haveRead) {
+//     const id = crypto.randomUUID();
+//     const newBook = new Book(id, title, author, pages, haveRead);
+//     myLibrary.push(newBook);
+//     console.table(myLibrary);
+// }
 
-
-function addBookToLibrary(title, author, pages, haveRead) {
-    const id = crypto.randomUUID();
-    const newBook = new Book(id, title, author, pages, haveRead);
-    myLibrary.push(newBook);
+function addBookToLibrary(book) {
+    myLibrary.push(book);
     console.table(myLibrary);
 }
 
-addBookToLibrary('O trofimos', 'Emilios Gkletsos', 420, "haven't read");
-addBookToLibrary('PEZOS', 'Afoi gkagkatsi', 890, 'have read');
-addBookToLibrary('Paralitos', 'Alfonso Davies', 569, 'have not read');
-addBookToLibrary('TestoSteroni', 'Petra Petra', 1000, 'have read');
-addBookToLibrary('Amore mio', 'Evi Rountou', 6969, 'have not read');
+// addBookToLibrary('O trofimos', 'Emilios Gkletsos', 420, "haven't read");
+// addBookToLibrary('PEZOS', 'Afoi gkagkatsi', 890, 'have read');
+// addBookToLibrary('Paralitos', 'Alfonso Davies', 569, 'have not read');
+// addBookToLibrary('TestoSteroni', 'Petra Petra', 1000, 'have read');
+// addBookToLibrary('Amore mio', 'Evi Rountou', 6969, 'have not read');
+
+const book1 = new Book(crypto.randomUUID(), "O trofimos", "Emilios Gkletsos", 420, "Haven't read");
+const book2 = new Book(crypto.randomUUID(), "Pezos", "Afoi gkagkatsi", 890, "Have read");
+const book3 = new Book(crypto.randomUUID(), "Paralitos", "Alfonso Davies", 569, "Haven't read");
+const book4 = new Book(crypto.randomUUID(), "TestoSteroni", "Petra Petra", 1000, "Have read");
+const book5 = new Book(crypto.randomUUID(), "Amore mio", "Evi Rountou", 6969, "Haven't read");
+
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
+addBookToLibrary(book4);
+addBookToLibrary(book5);
+
 
 Book.prototype.toggleRead = function () {
     if (this.haveRead === "Have read") {
@@ -46,33 +56,52 @@ function displayBooks(arr) {
     const bookList = document.querySelector('.book-list');
     bookList.innerHTML = '';
 
+    if (!arr.length) {
+        const emptyMsg = document.createElement('p');
+        emptyMsg.textContent = "No books in the library. Start reading mate!";
+        bookList.appendChild(emptyMsg);
+        empltyMsg.style.cssText = `
+        font-size: 18px;
+        `;
+        return;
+    }
+
     arr.forEach(book => {
         const li = document.createElement('li');
         li.textContent = `${book.title.toUpperCase()} by ${book.author}, ${book.pages}, ${book.haveRead}. `;
-//         li.style.cssText = `
-//          background-color: #f0f0f0;  
-//   border: 1px solid #ccc;     
-//   border-radius: 8px;          
-//   margin: 10px 0;
-//   box-shadow: 2px 2px 5px rgba(0,0,0,0.1); 
-//   display: flex;
-//   justify-content: space-between; 
-//   align-items: center;
-//   font-family: Arial, sans-serif;
-//         `;
+        //         li.style.cssText = `
+        //          background-color: #f0f0f0;  
+        //   border: 1px solid #ccc;     
+        //   border-radius: 8px;          
+        //   margin: 10px 0;
+        //   box-shadow: 2px 2px 5px rgba(0,0,0,0.1); 
+        //   display: flex;
+        //   justify-content: space-between; 
+        //   align-items: center;
+        //   font-family: Arial, sans-serif;
+        //         `;
         bookList.appendChild(li);
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = "Delete";
         deleteBtn.style.cssText = `
-                background-color: #f44336; /* red */
+                background-color: #f44336; 
                 color: white;
                 padding: 5px 10px;
                 font-size: 14px;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
-                transition: background-color 0.2s ease, transform 0.1s ease;
+                
 `;
+
+        deleteBtn.addEventListener('mouseover', () => {
+            deleteBtn.style.backgroundColor = "#d32f2f";
+        });
+
+        deleteBtn.addEventListener('mouseout', () => {
+            deleteBtn.style.backgroundColor = "#f44336";
+        });
+
         li.appendChild(deleteBtn);
 
         deleteBtn.addEventListener('click', () => {
@@ -89,15 +118,23 @@ function displayBooks(arr) {
         //Button to toggle the have read option
         const toggleBtn = document.createElement('button');
         toggleBtn.textContent = "Toggle Read";
-//         toggleBtn.style.cssText = `
-//   background-color: #2196F3; 
-//   color: white;
-//   padding: 5px 10px;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   margin-left: 10px;
-// `;
+        toggleBtn.style.cssText = `
+        background-color: #2196F3; 
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+        `;
+
+        toggleBtn.addEventListener('mouseover', () => {
+            toggleBtn.style.backgroundColor = "#1976D2";
+        })
+
+        toggleBtn.addEventListener('mouseout', () => {
+            toggleBtn.style.backgroundColor = "#2196F3";
+        });
 
         li.appendChild(toggleBtn);
 
@@ -115,15 +152,20 @@ displayBooks(myLibrary);
 const container = document.querySelector("#card")
 const newBookBtn = document.createElement("button");
 newBookBtn.textContent = "Create new Book";
-// newBookBtn.style.cssText = `
-//  background-color: #4CAF50; 
-//   color: white;
-//   padding: 10px 20px;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   transition: background-color 0.2s ease;
-// `;
+newBookBtn.className = `
+    bg-green-500 
+    hover:bg-green-600 
+    text-white 
+    font-semibold 
+    py-2 px-4 
+    rounded-lg 
+    shadow-lg 
+    transition 
+    duration-200 
+    ease-in-out
+    transform
+    hover:scale-105
+`;
 
 container.appendChild(newBookBtn);
 
@@ -148,7 +190,7 @@ newBookBtn.addEventListener("click", () => {
 });
 
 newBookBtn.addEventListener("mouseover", () => {
-    newBookBtn.style.backgroundColor = "#ab0d83";
+    newBookBtn.style.backgroundColor = "#green-600";
 });
 
 newBookBtn.addEventListener("mouseout", () => {
@@ -181,7 +223,11 @@ form.addEventListener('submit', (event) => {
     const pages = document.getElementById('pages').value;
     const haveRead = document.getElementById('haveRead').checked ? "Have read" : "Haven't read";
 
-    addBookToLibrary(title, author, pages, haveRead);
+    //Create book instance
+    const book = new Book(crypto.randomUUID(), title, author, pages, haveRead);
+
+    //Add book to library
+    addBookToLibrary(book);
 
     displayBooks(myLibrary);
     form.style.display = 'none';
