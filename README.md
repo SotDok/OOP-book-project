@@ -1,6 +1,6 @@
 # 📚 My Library
 
-A simple JavaScript library management app that allows users to add, display, toggle read status, and delete books. Built with **Vanilla JS** and styled with **Tailwind CSS** (optional).
+A simple JavaScript library management app that allows users to add, display, toggle read status, and delete books. Built with **Vanilla JS** and styled most of it with **Tailwind CSS**.
 
 ---
 
